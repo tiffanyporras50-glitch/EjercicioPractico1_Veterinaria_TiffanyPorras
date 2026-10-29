@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header th:fragment="encabezado" class="encabezado py-3">
+        <div class="container d-flex align-items-center gap-3">
+            <i class="bi bi-heart-pulse-fill icono-logo"></i>
+            <div>
+                <h1 class="h3 mb-0" th:text="#{app.nombre}">Clínica</h1>
+                <small th:text="#{header.eslogan}">Eslogan</small>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark menu-principal">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}"><i class="bi bi-house-heart-fill"></i></a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#menuNavegacion">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNavegacion">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}" th:text="#{nav.inicio}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/tipos}" th:text="#{nav.tipos}">Tipos</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/servicios}" th:text="#{nav.servicios}">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/citas}" th:text="#{nav.citas}">Citas</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/consultas}" th:text="#{nav.consultas}">Consultas</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MENSAJES (TOAST) ===== -->
+    <div th:fragment="mensajes" class="toast-container position-fixed top-0 end-0 p-3">
+        <div th:if="${mensaje}" class="toast align-items-center border-0" role="alert"
+             th:classappend="${tipoMensaje == 'danger'} ? 'text-bg-danger' : 'text-bg-success'">
+            <div class="d-flex">
+                <div class="toast-body" th:text="${mensaje}">Mensaje</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer th:fragment="pie" class="pie-pagina py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-1"><i class="bi bi-geo-alt-fill"></i> <span th:text="#{footer.direccion}">Dirección</span></p>
+            <p class="mb-1"><i class="bi bi-clock-fill"></i> <span th:text="#{footer.horario}">Horario</span></p>
+            <small th:text="#{footer.derechos}">Derechos</small>
+        </div>
+    </footer>
+
+</body>
+</html>

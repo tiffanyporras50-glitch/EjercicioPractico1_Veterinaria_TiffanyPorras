@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: pagina(~{::title}, ~{::main})}">
+<head>
+    <title>Inicio | Clínica Veterinaria Huellitas</title>
+</head>
+<body>
+<main class="container py-4 flex-grow-1">
+
+    <!-- Campaña del mes -->
+    <section class="campana-mes p-4 p-md-5 mb-5 shadow">
+        <span class="badge bg-light text-dark mb-2">Campaña de noviembre</span>
+        <h2 class="display-6 fw-bold"><i class="bi bi-balloon-heart-fill"></i> Paquete Cachorro Feliz</h2>
+        <p class="lead mb-3">
+            Primera consulta, vacuna polivalente, desparasitación y kit de bienvenida
+            para tu nuevo integrante de la familia.
+        </p>
+        <p class="fs-4 fw-bold mb-3">₡35 000 <small class="fs-6 fw-normal">(ahorras un 20 %)</small></p>
+        <a th:href="@{/consultas}" class="btn btn-light btn-lg">¡Quiero información!</a>
+    </section>
+
+    <!-- Información de la clínica -->
+    <h2 class="titulo-seccion mb-4">Conoce nuestra clínica</h2>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card tarjeta-info h-100 p-3">
+                <h3 class="h5"><i class="bi bi-clock-history text-success"></i> Horario</h3>
+                <p class="mb-1">Lunes a viernes: 8:00 a.m. – 6:00 p.m.</p>
+                <p class="mb-1">Sábados: 8:00 a.m. – 2:00 p.m.</p>
+                <p class="mb-0">Emergencias: 24/7</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card tarjeta-info h-100 p-3">
+                <h3 class="h5"><i class="bi bi-geo-alt text-success"></i> Ubicación</h3>
+                <p class="mb-0">San Roque de Heredia, 200 m norte de la iglesia. Contamos con parqueo gratuito.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card tarjeta-info h-100 p-3">
+                <h3 class="h5"><i class="bi bi-clipboard2-pulse text-success"></i> Especialidades</h3>
+                <ul class="mb-0">
+                    <li>Medicina general</li>
+                    <li>Vacunación</li>
+                    <li>Estética y grooming</li>
+                    <li>Cirugía programada</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video -->
+    <h2 class="titulo-seccion mb-4">Consejos para el cuidado de tu mascota</h2>
+    <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+        <iframe src="https://www.youtube.com/embed/LR2vdYnk9tI"
+                title="Cuidado de mascotas" allowfullscreen></iframe>
+    </div>
+
+</main>
+</body>
+</html>
