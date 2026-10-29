@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: pagina(~{::title}, ~{::main})}">
+<head>
+    <title>Consultas | Clínica Veterinaria Huellitas</title>
+</head>
+<body>
+<main class="container py-4 flex-grow-1">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Mensaje de agradecimiento -->
+            <div th:if="${mensaje}" class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                <i class="bi bi-check-circle-fill fs-4"></i>
+                <span th:text="${mensaje}">¡Gracias!</span>
+            </div>
+
+            <div class="card tarjeta-info p-4">
+                <h2 class="titulo-seccion mb-2">Envíanos tu consulta</h2>
+                <p class="text-muted mb-4">¿Tienes dudas sobre la salud de tu mascota? Escríbenos y te responderemos pronto.</p>
+
+                <form th:action="@{/consultas}" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Tu nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreMascota" class="form-label">Nombre de la mascota</label>
+                        <input type="text" id="nombreMascota" name="nombreMascota" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-principal">
+                            <i class="bi bi-send"></i> Enviar consulta
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

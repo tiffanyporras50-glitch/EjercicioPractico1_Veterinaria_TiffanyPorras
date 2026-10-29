@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: pagina(~{::title}, ~{::main})}">
+<head>
+    <title>Citas | Clínica Veterinaria Huellitas</title>
+</head>
+<body>
+<main class="container py-4 flex-grow-1">
+
+    <h2 class="titulo-seccion mb-4">Citas programadas</h2>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-striped align-middle mb-0 tabla-vet">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-heart"></i> Mascota</th>
+                    <th><i class="bi bi-person"></i> Propietario</th>
+                    <th><i class="bi bi-calendar-event"></i> Fecha</th>
+                    <th><i class="bi bi-clipboard2-pulse"></i> Servicio</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <tr th:each="cita : ${citas}">
+                    <td class="fw-semibold" th:text="${cita.nombreMascota}">Mascota</td>
+                    <td th:text="${cita.nombrePropietario}">Propietario</td>
+                    <td th:text="${#temporals.format(cita.fecha, 'dd/MM/yyyy')}">01/01/2026</td>
+                    <td th:text="${cita.servicio.nombre}">Servicio</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(citas)}">
+                    <td colspan="4" class="text-center text-muted py-4">No hay citas programadas.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+</body>
+</html>

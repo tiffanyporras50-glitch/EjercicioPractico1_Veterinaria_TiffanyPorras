@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: pagina(~{::title}, ~{::main})}">
+<head>
+    <title>Servicio | Clínica Veterinaria Huellitas</title>
+</head>
+<body>
+<main class="container py-4 flex-grow-1">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card tarjeta-info p-4">
+                <h2 class="titulo-seccion mb-4"
+                    th:text="${servicio.id == null} ? 'Agregar servicio' : 'Editar servicio'">
+                    Servicio
+                </h2>
+
+                <form th:action="@{/servicios/guardar}" th:object="${servicio}" method="post">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}"
+                               maxlength="100" required>
+                    </div>
+
+                    <!-- Lista desplegable de tipos -->
+                    <div class="mb-3">
+                        <label for="tipoServicio" class="form-label">Tipo de servicio</label>
+                        <select class="form-select" th:field="*{tipoServicio.id}" required>
+                            <option value="">-- Selecciona un tipo --</option>
+                            <option th:each="tipo : ${tipos}"
+                                    th:value="${tipo.id}"
+                                    th:text="${tipo.nombre}">Tipo</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label for="precio" class="form-label">Precio (₡)</label>
+                            <input type="number" class="form-control" th:field="*{precio}"
+                                   min="0" step="0.01" required>
+                        </div>
+                        <div class="col-sm-6 mb-4">
+                            <label for="duracionMinutos" class="form-label">Duración (minutos)</label>
+                            <input type="number" class="form-control" th:field="*{duracionMinutos}"
+                                   min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a th:href="@{/servicios}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-principal">
+                            <i class="bi bi-save"></i> Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
