@@ -4,6 +4,7 @@
  */
 package com.clinica.veterinaria.repository;
 import com.clinica.veterinaria.domain.Servicio;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,4 +17,8 @@ public interface ServicioRepository extends JpaRepository<Servicio, Integer> {
     List<Servicio> findAllByOrderByNombreAsc();
 
     boolean existsByTipoServicioId(Integer tipoServicioId);
+
+    // Consulta ampliada (consulta derivada): servicios con precio entre un
+    // mínimo y un máximo, ordenados del más barato al más caro
+    List<Servicio> findByPrecioBetweenOrderByPrecioAsc(BigDecimal precioInf, BigDecimal precioSup);
 }

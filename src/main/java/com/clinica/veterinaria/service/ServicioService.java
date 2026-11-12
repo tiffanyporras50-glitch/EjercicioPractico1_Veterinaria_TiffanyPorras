@@ -4,6 +4,7 @@
  */
 package com.clinica.veterinaria.service;
 import com.clinica.veterinaria.domain.Servicio;
+import java.math.BigDecimal;
 import java.util.List;
 /**
  *
@@ -18,4 +19,6 @@ public interface ServicioService {
     void guardarServicio(Servicio servicio);
 
     boolean eliminarServicio(Integer id);
+
+    List<Servicio> consultaDerivada(BigDecimal precioInf, BigDecimal precioSup);
 }

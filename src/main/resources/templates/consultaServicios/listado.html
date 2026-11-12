@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: pagina(~{::title}, ~{::main})}">
+<head>
+    <title>Búsqueda por precio | Clínica Veterinaria Huellitas</title>
+</head>
+<body>
+<main class="container py-4 flex-grow-1">
+
+    <h2 class="titulo-seccion mb-4">Búsqueda de servicios por precio</h2>
+
+    <!-- Formulario de la consulta derivada -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form th:action="@{/consultaServicios/consultaDerivada}" method="post"
+                  class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label for="precioInf" class="form-label">Precio mínimo (₡)</label>
+                    <input type="number" step="0.01" min="0" class="form-control"
+                           id="precioInf" name="precioInf" th:value="${precioInf}" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="precioSup" class="form-label">Precio máximo (₡)</label>
+                    <input type="number" step="0.01" min="0" class="form-control"
+                           id="precioSup" name="precioSup" th:value="${precioSup}" required>
+                </div>
+                <div class="col-md-4 d-flex gap-2">
+                    <button type="submit" class="btn btn-principal">
+                        <i class="bi bi-search"></i> Buscar
+                    </button>
+                    <a th:href="@{/consultaServicios/listado}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-counterclockwise"></i> Ver todos
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p class="text-muted" th:if="${precioInf != null}">
+        Mostrando servicios entre
+        <strong th:text="'₡' + ${#numbers.formatDecimal(precioInf, 1, 'POINT', 2, 'COMMA')}">₡0</strong>
+        y
+        <strong th:text="'₡' + ${#numbers.formatDecimal(precioSup, 1, 'POINT', 2, 'COMMA')}">₡0</strong>,
+        ordenados del más barato al más caro
+        (<span th:text="${totalServicios}">0</span> resultado(s)).
+    </p>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle mb-0 tabla-vet">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th class="text-end">Precio</th>
+                    <th class="text-center">Duración</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <tr th:each="servicio : ${servicios}">
+                    <td class="fw-semibold" th:text="${servicio.nombre}">Nombre</td>
+                    <td><span class="badge text-bg-light border" th:text="${servicio.tipoServicio.nombre}">Tipo</span></td>
+                    <td class="text-end"
+                        th:text="'₡' + ${#numbers.formatDecimal(servicio.precio, 1, 'POINT', 2, 'COMMA')}">₡0,00</td>
+                    <td class="text-center" th:text="${servicio.duracionMinutos} + ' min'">0 min</td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(servicios)}">
+                    <td colspan="4" class="text-center text-muted py-4">
+                        No hay servicios en ese rango de precio.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+</body>
+</html>

@@ -8,6 +8,7 @@ import com.clinica.veterinaria.domain.TipoServicio;
 import com.clinica.veterinaria.repository.CitaRepository;
 import com.clinica.veterinaria.repository.ServicioRepository;
 import com.clinica.veterinaria.repository.TipoServicioRepository;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,5 +61,11 @@ public class ServicioServiceImpl implements ServicioService {
         }
         servicioRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Servicio> consultaDerivada(BigDecimal precioInf, BigDecimal precioSup) {
+        return servicioRepository.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
     }
 }
